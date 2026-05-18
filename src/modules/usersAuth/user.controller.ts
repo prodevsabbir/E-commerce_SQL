@@ -18,6 +18,16 @@ export const loginUser = asyncHandler(async (req, res) => {
     sameSite: "strict",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
+
+//set access token as cookie
+  res.cookie("accessToken", result.accessToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+  });
+
+
   ApiResponse.sendSuccess(res, 200, "User logged in successfully", {
     user: result.user,
     accesstoken: result.accessToken,

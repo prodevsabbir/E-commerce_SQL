@@ -16,7 +16,7 @@ export const authGuard = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const accessToken = req.headers?.authorization?.split("Bearer ")[1];
+    const accessToken = req.cookies.accessToken || req.headers?.authorization?.split("Bearer ")[1];
 
     if (!accessToken) {
       throw new CustomError(401, "Access token not found!");
@@ -84,7 +84,9 @@ export const authGuardOptional = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const accessToken = req.headers?.authorization?.split("Bearer ")[1];
+    const accessToken = req.cookies.accessToken || req.headers?.authorization?.split("Bearer ")[1];
+
+    console.log("Access token:", req.cookies);
 
     if (!accessToken) {
       return next();
