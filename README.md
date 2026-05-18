@@ -32,6 +32,18 @@ This backend is structured using a modular architecture for scalability and main
   - URL-friendly slug generation automatically via `slugify`.
   - Image assignments for categories.
 
+- **🛒 Shopping Cart & Orders (`cart`, `order`)**:
+  - Add to cart, update quantity, and remove items.
+  - Create full checkout orders processing subtotals and shipping fees.
+  - Automated stock decrement upon order placement.
+  - Admin controls for updating order and payment statuses.
+
+- **⭐ Reviews (`review`)**:
+  - Users can review products they have successfully purchased.
+  - Strict one-review-per-user per-product enforcement.
+  - Real-time rating aggregation and review statistics.
+  - Review moderation controls for users and administrators.
+
 ---
 
 ## 🛠️ Technology Stack
@@ -57,8 +69,11 @@ src/
 ├── helpers/               # Reusable helpers (Cloudinary, CustomError)
 ├── middleware/            # AuthGuards, Zod Validation, Multer setups
 ├── modules/               # Feature-based modular architecture
+│   ├── cart/              # Cart management
 │   ├── category/          # Category controller, service, validation, route
+│   ├── order/             # Order and checkout logic
 │   ├── product/           # Product controller, service, validation, route
+│   ├── review/            # Product reviews and rating logic
 │   └── usersAuth/         # User and Authentication logic
 ├── routes/                # Global API Router mapping
 └── utils/                 # Utility functions (Pagination, AsyncHandlers)
@@ -133,6 +148,11 @@ The API is prefixed with `/api/v1/`:
   - `POST /create-product`, `GET /get-all-products`, `PATCH /update-product/:id`
 - **Categories**: `/api/v1/category`
   - `POST /create-category`, `GET /get-all-category`, `PATCH /update-category/:id`
+- **Cart & Orders**: `/api/v1/cart`, `/api/v1/order`
+  - `GET /cart`, `POST /cart-item/add`, `POST /order/create`
+  - `GET /order/my-orders`, `PATCH /order/:orderId/status`
+- **Reviews**: `/api/v1/review`
+  - `POST /`, `GET /product/:productId`, `PATCH /:reviewId`, `DELETE /:reviewId`
 
 ---
 

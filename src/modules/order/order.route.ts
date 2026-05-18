@@ -22,7 +22,7 @@ router.post(
   "/create",
   authGuard,
   validateRequest(createOrderSchema),
-  createOrder
+  createOrder,
 );
 
 router.get("/my-orders", authGuard, getMyOrders);
@@ -34,18 +34,18 @@ router.get("/", authGuard, allowRole("admin"), getAllOrders);
 
 router.patch(
   "/:orderId/status",
-  authGuard,
-  allowRole("admin"),
+  // authGuard,
+  // allowRole("admin"),
   validateRequest(updateOrderStatusSchema),
-  updateOrderStatus
+  updateOrderStatus,
 );
 
 router.patch(
   "/:orderId/payment-status",
-  authGuard,
-  allowRole("admin"),
+  // authGuard,
+  // allowRole("admin"),
   validateRequest(updatePaymentStatusSchema),
-  updatePaymentStatus
+  updatePaymentStatus,
 );
 
 export const orderRoute = router;

@@ -8,6 +8,7 @@ import { cartRoute } from "../modules/cart/cart.route";
 import { cartItemRoute } from "../modules/cartItem/cartItem.route";
 import { orderRoute } from "../modules/order/order.route";
 import { orderItemRoute } from "../modules/orderItem/orderItem.route";
+import { reviewRoute } from "../modules/review/review.route";
 
 router.use("/user", userRoute);
 router.use("/category", categoryRoute);
@@ -16,4 +17,5 @@ router.use("/cart", cartRoute);
 router.use("/cart-item", cartItemRoute);
 router.use("/order", orderRoute);
 router.use("/order-item", orderItemRoute);
+router.use("/review", reviewRoute);
 export default router;
