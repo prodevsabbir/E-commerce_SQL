@@ -13,6 +13,12 @@ import {
   getCategoryById,
   updateCategory,
 } from "./category.controller";
+import {
+  createLimiter,
+  deleteLimiter,
+  readLimiter,
+  updateLimiter,
+} from "../../middleware/rateLimiter.middleware";
 
 const router = Router();
 
@@ -20,19 +26,20 @@ router.post(
   "/create-category",
   // authGuard,
   // allowRole("admin"),
+  createLimiter,
   upload.single("image"),
   validateRequest(createCategorySchema),
   createCategory,
 );
 
-router.get("/get-category/:categoryId", getCategoryById);
-
-router.get("/get-all-category", getAllCategories);
+router.get("/get-category/:categoryId", readLimiter, getCategoryById);
+router.get("/get-all-category",         readLimiter, getAllCategories);
 
 router.patch(
   "/update-category/:categoryId",
   // authGuard,
   // allowRole("admin"),
+  updateLimiter,
   upload.single("image"),
   validateRequest(updateCategorySchema),
   updateCategory,
@@ -42,8 +49,8 @@ router.delete(
   "/delete-category/:categoryId",
   // authGuard,
   // allowRole("admin"),
+  deleteLimiter,
   deleteCategory,
 );
-
 
 export const categoryRoute = router;
